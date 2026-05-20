@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Become A Teacher — Kenlee Technical College</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/KTC-LOGO.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* ── form card niceties ── */
+        .apply-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 32px rgba(79,118,142,0.10);
+            border: 1px solid #e8e0db;
+        }
+        .apply-card .section-divider {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #4f768e;
+            border-bottom: 2px solid #d6e6ef;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            margin-top: 28px;
+        }
+        .apply-card .section-divider:first-of-type { margin-top: 0; }
+
+        .form-floating label { font-size: 14px; color: #8a7d7d; }
+        .form-floating .form-control:focus { border-color: #4f768e; box-shadow: 0 0 0 3px rgba(79,118,142,0.15); }
+        .form-floating textarea.form-control { min-height: 110px; }
+
+        /* radio / checkbox group */
+        .check-group { display: flex; flex-wrap: wrap; gap: 10px; }
+        .check-group .form-check {
+            background: #f5f0eb;
+            border: 1px solid #e8e0db;
+            border-radius: 8px;
+            padding: 8px 16px 8px 36px;
+            margin: 0;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .check-group .form-check:has(input:checked) {
+            background: #d6e6ef;
+            border-color: #4f768e;
+        }
+        .check-group .form-check-label { font-size: 14px; cursor: pointer; }
+
+        /* submit button */
+        .btn-apply {
+            background: #fe5d37;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 14px 36px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .btn-apply:hover { background: #e04520; color: #fff; transform: translateY(-1px); }
+        .btn-apply:disabled { opacity: 0.6; pointer-events: none; }
+
+        /* sidebar info cards */
+        .info-card {
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .info-card h5 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+        .info-card ul { padding-left: 0; list-style: none; margin: 0; }
+        .info-card ul li {
+            font-size: 14px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            display: flex; align-items: flex-start; gap: 8px;
+        }
+        .info-card ul li:last-child { border-bottom: none; }
+        .info-card ul li i { margin-top: 3px; flex-shrink: 0; }
+
+        /* success message */
+        #form-success {
+            display: none;
+            background: #d6e6ef;
+            border: 1px solid #4f768e;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+        }
+        #form-success h4 { color: #3a5f75; font-weight: 700; }
+        #form-success p  { color: #5a4d4d; margin: 0; }
+    </style>
+</head>
+
+<body>
+<div class="container-xxl bg-white p-0">
+
+    <!-- Spinner -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width:3rem;height:3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Page Header -->
+    <div class="container-xxl py-5 page-header position-relative mb-5">
+        <div class="container py-5">
+            <h1 class="display-2 text-white animated slideInDown mb-4">Become A Teacher</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Become A Teacher</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Why Teach Here -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="bg-light rounded">
+                <div class="row g-0">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s" style="min-height: 420px;">
+                        <div class="position-relative h-100">
+                            <!-- Replace with your own image -->
+                            <img class="position-absolute w-100 h-100 rounded" src="img/become_teacher.png" style="object-fit: cover;">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.4s">
+                        <div class="h-100 d-flex flex-column justify-content-center p-5">
+                            <h1 class="mb-3">Shape the Next Generation of Skilled Professionals</h1>
+                            <p>We are inviting qualified and passionate professionals to join our team of instructors and help develop highly skilled graduates. As an NBTE-accredited institution, we uphold high academic and technical standards.</p>
+                            <p class="mb-4">With the growing demand for skilled technicians across Nigeria, this is your opportunity to make a meaningful impact — preparing students for successful careers in today's competitive workforce.</p>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                                            <i class="fa fa-check text-white" style="font-size:13px;"></i>
+                                        </div>
+                                        <span style="font-size:14px;font-weight:600;">Competitive salary</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                                            <i class="fa fa-check text-white" style="font-size:13px;"></i>
+                                        </div>
+                                        <span style="font-size:14px;font-weight:600;">Modern facilities</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                                            <i class="fa fa-check text-white" style="font-size:13px;"></i>
+                                        </div>
+                                        <span style="font-size:14px;font-weight:600;">Supportive team</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width:40px;height:40px;">
+                                            <i class="fa fa-check text-white" style="font-size:13px;"></i>
+                                        </div>
+                                        <span style="font-size:14px;font-weight:600;">CPD opportunities</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Form -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width:600px;">
+                <h4 class="text-primary">Apply Now</h4>
+                <h1 class="mb-3">Teacher Application Form</h1>
+                <p>Fill in the form below and we'll be in touch. All fields marked <span class="text-danger">*</span> are required.</p>
+            </div>
+
+            <div class="row g-5">
+
+                <!-- ── FORM ── -->
+                <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="apply-card p-4 p-md-5">
+
+                        <!-- Success message (shown after submit) -->
+                        <div id="form-success">
+                            <i class="fa fa-check-circle fa-3x mb-3" style="color:#4f768e;"></i>
+                            <h4>Application Received!</h4>
+                            <p>Thank you for your interest in teaching at Kenlee Technical College. We'll review your application and get back to you within 5 working days.</p>
+                        </div>
+
+                        <!--
+                            FORMSPREE SETUP (one-time, free):
+                            1. Go to https://formspree.io and sign up with kenleetechnical@gmail.com
+                            2. Create a new form — Formspree gives you a unique endpoint like:
+                               https://formspree.io/f/xyzabcde
+                            3. Replace YOUR_FORMSPREE_ID below with that ID (just the last part, e.g. xyzabcde)
+                            4. Verify your Gmail when Formspree sends the confirmation email
+                            Done — every submission goes straight to kenleetechnical@gmail.com
+                        -->
+                        <form id="apply-form" action="https://formspree.io/f/mojplzqr" method="POST" novalidate>
+
+                            <!-- Personal Details -->
+                            <div class="section-divider">Personal Details</div>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="firstName" name="First Name" placeholder="First Name" required>
+                                        <label for="firstName">First Name <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="lastName" name="Last Name" placeholder="Last Name" required>
+                                        <label for="lastName">Last Name <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" name="Email" placeholder="Email" required>
+                                        <label for="email">Email Address <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="phone" name="Phone Number" placeholder="Phone">
+                                        <label for="phone">Phone Number</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="city" name="City / LGA" placeholder="City">
+                                        <label for="city">City / LGA</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <select class="form-control form-select" id="gender" name="Gender">
+                                            <option value="" disabled selected></option>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                            <option>Prefer not to say</option>
+                                        </select>
+                                        <label for="gender">Gender</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Teaching Area -->
+                            <div class="section-divider">Teaching Area</div>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" style="font-size:14px;">Which subject(s) can you teach? <span class="text-danger">*</span></label>
+                                    <div class="check-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="Subject" value="Fashion & Sewing" id="s1">
+                                            <label class="form-check-label" for="s1">Fashion &amp; Sewing</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="Subject" value="Construction" id="s2">
+                                            <label class="form-check-label" for="s2">Construction</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="Subject" value="Welding & Fabrication" id="s3">
+                                            <label class="form-check-label" for="s3">Welding &amp; Fabrication</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="Subject" value="Automotive / Car Maintenance" id="s4">
+                                            <label class="form-check-label" for="s4">Automotive</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="Subject" value="Robotics & Electronics" id="s5">
+                                            <label class="form-check-label" for="s5">Robotics &amp; Electronics</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="Subject" value="Other" id="s6">
+                                            <label class="form-check-label" for="s6">Other</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <select class="form-control form-select" id="experience" name="Years of Experience" required>
+                                            <option value="" disabled selected></option>
+                                            <option>Less than 1 year</option>
+                                            <option>1 – 3 years</option>
+                                            <option>3 – 5 years</option>
+                                            <option>5 – 10 years</option>
+                                            <option>10+ years</option>
+                                        </select>
+                                        <label for="experience">Years of Experience <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <select class="form-control form-select" id="availability" name="Availability">
+                                            <option value="" disabled selected></option>
+                                            <option>Full-time</option>
+                                            <option>Part-time</option>
+                                            <option>Either</option>
+                                        </select>
+                                        <label for="availability">Availability</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Qualifications -->
+                            <div class="section-divider">Qualifications</div>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <select class="form-control form-select" id="qualification" name="Highest Qualification" required>
+                                            <option value="" disabled selected></option>
+                                            <option>WAEC / NECO</option>
+                                            <option>OND</option>
+                                            <option>HND</option>
+                                            <option>B.Sc / B.Tech / B.Ed</option>
+                                            <option>PGDE / PGCE</option>
+                                            <option>M.Sc / M.Tech / M.Ed</option>
+                                            <option>Ph.D</option>
+                                            <option>Professional Certification (e.g. COREN, NIM)</option>
+                                            <option>Trade / Vocational Certificate</option>
+                                        </select>
+                                        <label for="qualification">Highest Qualification <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="institution" name="Institution Attended" placeholder="Institution">
+                                        <label for="institution">Institution Attended</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="certifications" name="Professional Certifications" placeholder="e.g. COREN, City & Guilds">
+                                        <label for="certifications">Professional Certifications (if any)</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cover Note -->
+                            <div class="section-divider">Cover Note</div>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" id="message" name="Cover Note" placeholder="Tell us about yourself" style="min-height:140px;" required></textarea>
+                                        <label for="message">Why do you want to teach at Kenlee? <span class="text-danger">*</span></label>
+                                    </div>
+                                </div>
+                                <!-- Hidden fields that help Formspree label the email nicely -->
+                                <input type="hidden" name="_subject" value="New Teacher Application — Kenlee Technical College">
+                                <input type="text" name="_gotcha" style="display:none;">
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-between mt-4 flex-wrap gap-3">
+                                <p class="text-muted mb-0" style="font-size:13px;"><span class="text-danger">*</span> Required fields</p>
+                                <button type="submit" class="btn-apply" id="submit-btn">
+                                    Submit Application <i class="fa fa-paper-plane ms-2"></i>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ── SIDEBAR ── -->
+                <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+
+                    <!-- What we look for -->
+                    <div class="info-card" style="background:#4f768e;">
+                        <h5 class="text-white"><i class="fa fa-star me-2"></i>What We Look For</h5>
+                        <ul>
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> Relevant academic or professional qualification</li>
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> Practical industry experience in your field</li>
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> Passion for teaching and mentoring young people</li>
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> Good communication and classroom management skills</li>
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> Commitment to NBTE standards and school values</li>
+                        </ul>
+                    </div>
+
+                    <!-- Process -->
+                    <div class="info-card" style="background:#5a4d4d;">
+                        <h5 class="text-white"><i class="fa fa-list-ol me-2"></i>Application Process</h5>
+                        <ul>
+                            <li class="text-white-50"><i class="fa fa-circle text-white" style="font-size:8px;margin-top:5px;"></i> Submit this form</li>
+                            <li class="text-white-50"><i class="fa fa-circle text-white" style="font-size:8px;margin-top:5px;"></i> We review your application (within 5 working days)</li>
+                            <li class="text-white-50"><i class="fa fa-circle text-white" style="font-size:8px;margin-top:5px;"></i> Shortlisted candidates invited for interview</li>
+                            <li class="text-white-50"><i class="fa fa-circle text-white" style="font-size:8px;margin-top:5px;"></i> Offer letter issued to successful applicants</li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="info-card bg-light">
+                        <h5 style="color:#4f768e;"><i class="fa fa-envelope me-2"></i>Got Questions?</h5>
+                        <ul>
+                            <li style="color:#5a4d4d; border-color:#e8e0db;"><i class="fa fa-envelope" style="color:#fe5d37;"></i> kenleetechnical@gmail.com</li>
+                            <li style="color:#5a4d4d; border-color:#e8e0db;"><i class="fa fa-phone-alt" style="color:#fe5d37;"></i> +234 80 006 3111</li>
+                            <li style="color:#5a4d4d; border-color:transparent;"><i class="fa fa-clock" style="color:#fe5d37;"></i> Mon – Fri, 8:00 AM – 4:00 PM</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    /* ── Load shared components ── */
+    function loadComponent(id, file) {
+        fetch(file)
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById(id).innerHTML = html;
+                if (id === 'navbar') {
+                    const currentPage = window.location.pathname.split('/').pop();
+                    document.querySelectorAll('.nav-link, .dropdown-item').forEach(link => {
+                        if (link.getAttribute('href') === currentPage) link.classList.add('active');
+                    });
+                }
+            });
+    }
+    loadComponent('navbar', 'navbar.html');
+    loadComponent('footer', 'footer.html');
+
+    /* ── AJAX form submission (keeps user on the page) ── */
+    const form    = document.getElementById('apply-form');
+    const success = document.getElementById('form-success');
+    const btn     = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // Basic client-side check
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        const data = new FormData(form);
+
+        try {
+            const res = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (res.ok) {
+                form.style.display = 'none';
+                success.style.display = 'block';
+                success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                btn.textContent = 'Submit Application';
+                btn.disabled = false;
+                alert('Something went wrong. Please try again or email us directly at kenleetechnical@gmail.com');
+            }
+        } catch {
+            btn.textContent = 'Submit Application';
+            btn.disabled = false;
+            alert('Network error. Please check your connection and try again.');
+        }
+    });
+</script>
+
+</body>
+</html>

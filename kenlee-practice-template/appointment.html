@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Appointments & Admissions — Kenlee Technical College</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link href="img/KTC-LOGO.png" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        /* ── Tab switcher ── */
+        .appt-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+        .appt-tab-btn {
+            flex: 1;
+            min-width: 180px;
+            padding: 18px 24px;
+            border-radius: 14px;
+            border: 2px solid #e8e0db;
+            background: #fff;
+            cursor: pointer;
+            text-align: left;
+            transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+        }
+        .appt-tab-btn:hover { border-color: #4f768e; }
+        .appt-tab-btn.active {
+            border-color: #4f768e;
+            background: #f0f7fb;
+            box-shadow: 0 4px 18px rgba(79,118,142,0.12);
+        }
+        .appt-tab-btn .tab-icon {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .appt-tab-btn.active .tab-icon { background: #4f768e; color: #fff; }
+        .appt-tab-btn:not(.active) .tab-icon { background: #f5f0eb; color: #4f768e; }
+        .appt-tab-btn .tab-title {
+            font-size: 15px; font-weight: 700; color: #2e2828;
+            display: block; margin-bottom: 2px;
+        }
+        .appt-tab-btn .tab-sub {
+            font-size: 12px; color: #8a7d7d;
+        }
+
+        /* ── Form panel ── */
+        .form-panel { display: none; }
+        .form-panel.active { display: block; }
+
+        /* ── Card wrapper ── */
+        .appt-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 32px rgba(79,118,142,0.10);
+            border: 1px solid #e8e0db;
+            padding: 36px 40px;
+        }
+        @media (max-width: 576px) { .appt-card { padding: 24px 20px; } }
+
+        /* ── Section labels inside form ── */
+        .form-section-label {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #4f768e;
+            border-bottom: 2px solid #d6e6ef;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            margin-top: 28px;
+        }
+        .form-section-label:first-of-type { margin-top: 0; }
+
+        /* ── Inputs ── */
+        .form-floating label { font-size: 14px; color: #8a7d7d; }
+        .form-control:focus {
+            border-color: #4f768e !important;
+            box-shadow: 0 0 0 3px rgba(79,118,142,0.15) !important;
+        }
+        .form-floating textarea.form-control { min-height: 110px; }
+
+        /* Guardian highlight */
+        .guardian-highlight {
+            background: #fff8f0;
+            border: 1.5px solid #fe5d37;
+            border-radius: 12px;
+            padding: 4px 0 4px;
+        }
+        .guardian-highlight .form-floating label { color: #c0390c; font-weight: 600; }
+
+        /* ── Radio type selector ── */
+        .radio-group { display: flex; gap: 10px; flex-wrap: wrap; }
+        .radio-card {
+            flex: 1; min-width: 120px;
+            border: 2px solid #e8e0db;
+            border-radius: 10px;
+            padding: 12px 16px;
+            cursor: pointer;
+            text-align: center;
+            transition: border-color 0.2s, background 0.2s;
+            position: relative;
+        }
+        .radio-card input[type="radio"] {
+            position: absolute; opacity: 0; width: 0; height: 0;
+        }
+        .radio-card:has(input:checked) {
+            border-color: #4f768e;
+            background: #f0f7fb;
+        }
+        .radio-card .rc-icon { font-size: 20px; margin-bottom: 4px; display: block; }
+        .radio-card .rc-label { font-size: 13px; font-weight: 600; color: #2e2828; }
+
+        /* ── Submit button ── */
+        .btn-submit {
+            background: #fe5d37;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 14px 36px;
+            transition: background 0.2s, transform 0.2s;
+            white-space: nowrap;
+        }
+        .btn-submit:hover { background: #e04520; color: #fff; transform: translateY(-1px); }
+        .btn-submit:disabled { opacity: 0.6; pointer-events: none; }
+
+        /* ── Success box ── */
+        .form-success {
+            display: none;
+            background: #f0f7fb;
+            border: 1.5px solid #4f768e;
+            border-radius: 14px;
+            padding: 40px 32px;
+            text-align: center;
+        }
+        .form-success h4 { color: #3a5f75; font-weight: 700; margin-top: 16px; }
+        .form-success p  { color: #5a4d4d; margin: 0; }
+        .form-success .success-icon {
+            width: 72px; height: 72px;
+            background: #4f768e;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto;
+        }
+
+        /* ── Sidebar cards ── */
+        .side-card {
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .side-card h5 {
+            font-size: 15px; font-weight: 700; margin-bottom: 14px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .side-card ul { list-style: none; padding: 0; margin: 0; }
+        .side-card ul li {
+            font-size: 13px; padding: 7px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            display: flex; align-items: flex-start; gap: 10px;
+            line-height: 1.5;
+        }
+        .side-card ul li:last-child { border-bottom: none; padding-bottom: 0; }
+        .side-card ul li i { margin-top: 2px; flex-shrink: 0; }
+
+        /* ── What to bring / checklist ── */
+        .checklist li { color: #2e2828; }
+        .checklist li i { color: #4f768e; }
+
+        /* ── Info row at top ── */
+        .info-strip {
+            background: #4f768e;
+            border-radius: 14px;
+            padding: 20px 28px;
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+        }
+        .info-strip-item {
+            display: flex; align-items: center; gap: 12px;
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+        }
+        .info-strip-item i { color: #ffe8b0; font-size: 18px; }
+        .info-strip-item span { line-height: 1.4; }
+        .info-strip-item strong { display: block; color: #fff; font-size: 15px; }
+    </style>
+</head>
+
+<body>
+<div class="container-xxl bg-white p-0">
+
+    <!-- Spinner -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width:3rem;height:3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <div id="navbar"></div>
+
+    <!-- Page Header -->
+    <div class="container-xxl py-5 page-header position-relative mb-5">
+        <div class="container py-5">
+            <h1 class="display-2 text-white animated slideInDown mb-4">Appointments &amp; Admissions</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Appointment</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Section -->
+    <div class="container-xxl py-5">
+        <div class="container">
+
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width:620px;">
+                <h4 class="text-primary">We'd Love to Meet You</h4>
+                <h1 class="mb-3">Book an Appointment or Apply for Admission</h1>
+                <p>Choose what you'd like to do below. All submissions go directly to our admissions team and we'll respond within 2 working days.</p>
+            </div>
+
+            <div class="row g-5">
+
+                <!-- ── LEFT: Forms ── -->
+                <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+
+                    <!-- Quick info strip -->
+                    <div class="info-strip">
+                        <div class="info-strip-item">
+                            <i class="fa fa-map-marker-alt"></i>
+                            <span><strong>Our Location</strong>NO. 9, LANE P, ELIMINIGWE HOUSING ESTATE, ELELENWO</span>
+                        </div>
+                        <div class="info-strip-item">
+                            <i class="fa fa-clock"></i>
+                            <span><strong>Office Hours</strong>Mon – Fri, 8:00 AM – 4:00 PM</span>
+                        </div>
+                        <div class="info-strip-item">
+                            <i class="fa fa-envelope"></i>
+                            <span><strong>Email Us</strong>kenleetechnical@gmail.com</span>
+                        </div>
+                    </div>
+
+                    <!-- Tab switcher -->
+                    <div class="appt-tabs">
+                        <button class="appt-tab-btn active" onclick="switchTab('admission', this)" type="button">
+                            <div class="tab-icon"><i class="fa fa-graduation-cap"></i></div>
+                            <span class="tab-title">Apply for Admission</span>
+                            <span class="tab-sub">Enrol your child at Kenlee Technical College</span>
+                        </button>
+                        <button class="appt-tab-btn" onclick="switchTab('appointment', this)" type="button">
+                            <div class="tab-icon"><i class="fa fa-calendar-check"></i></div>
+                            <span class="tab-title">Book an Appointment</span>
+                            <span class="tab-sub">Schedule a visit or meeting with the school</span>
+                        </button>
+                    </div>
+
+                    <!-- ══════════════════════════════════ -->
+                    <!--  ADMISSION FORM                   -->
+                    <!-- ══════════════════════════════════ -->
+                    <div id="panel-admission" class="form-panel active">
+                        <div class="appt-card">
+
+                            <div class="form-success" id="success-admission">
+                                <div class="success-icon"><i class="fa fa-check fa-2x text-white"></i></div>
+                                <h4>Application Submitted!</h4>
+                                <p>Thank you for applying to Kenlee Technical College. Our admissions team will review your application and contact the guardian within 2 working days.</p>
+                            </div>
+
+                            <!--
+                                FORMSPREE SETUP:
+                                1. Go to https://formspree.io → sign up with kenleetechnical@gmail.com
+                                2. Create a new form, copy the endpoint ID (e.g. xyzabcde)
+                                3. Replace YOUR_ADMISSION_FORM_ID below with that ID
+                                   (You can use one form for both, or create two separate ones)
+                            -->
+                            <form id="form-admission" action="https://formspree.io/f/mlgvgqgd" method="POST" novalidate>
+                                <input type="hidden" name="_subject" value="New Admission Application — Kenlee Technical College">
+                                <input type="text" name="_gotcha" style="display:none;">
+
+                                <!-- Guardian Details -->
+                                <div class="form-section-label">Guardian Details</div>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <p class="text-muted mb-3" style="font-size:13px;"><i class="fa fa-info-circle text-primary me-1"></i> As a secondary school, the guardian is the primary point of contact for all admissions communication. Please fill this section carefully.</p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating guardian-highlight">
+                                            <input type="text" class="form-control border-0 bg-transparent" id="g-fullname" name="Guardian Full Name" placeholder="Guardian Full Name" required>
+                                            <label for="g-fullname">Guardian Full Name <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating guardian-highlight">
+                                            <select class="form-control form-select border-0 bg-transparent" id="g-relation" name="Guardian Relationship" required>
+                                                <option value="" disabled selected></option>
+                                                <option>Father</option>
+                                                <option>Mother</option>
+                                                <option>Both Parents</option>
+                                                <option>Legal Guardian</option>
+                                                <option>Older Sibling</option>
+                                                <option>Uncle / Aunt</option>
+                                                <option>Other</option>
+                                            </select>
+                                            <label for="g-relation">Relationship to Student <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating guardian-highlight">
+                                            <input type="email" class="form-control border-0 bg-transparent" id="g-email" name="Guardian Email" placeholder="Guardian Email" required>
+                                            <label for="g-email">Guardian Email <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating guardian-highlight">
+                                            <input type="tel" class="form-control border-0 bg-transparent" id="g-phone" name="Guardian Phone" placeholder="Guardian Phone" required>
+                                            <label for="g-phone">Guardian Phone Number <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="g-address" name="Guardian Address" placeholder="Address">
+                                            <label for="g-address">Home Address</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="g-occupation" name="Guardian Occupation" placeholder="Occupation">
+                                            <label for="g-occupation">Occupation</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Student Details -->
+                                <div class="form-section-label">Student Details</div>
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="s-firstname" name="Student First Name" placeholder="First Name" required>
+                                            <label for="s-firstname">Student First Name <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="s-lastname" name="Student Last Name" placeholder="Last Name" required>
+                                            <label for="s-lastname">Student Last Name <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control border-0" id="s-dob" name="Student Date of Birth">
+                                            <label for="s-dob">Date of Birth</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-floating">
+                                            <select class="form-control form-select border-0" id="s-gender" name="Student Gender">
+                                                <option value="" disabled selected></option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                            </select>
+                                            <label for="s-gender">Gender</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-floating">
+                                            <select class="form-control form-select border-0" id="s-class" name="Class Applying For" required>
+                                                <option value="" disabled selected></option>
+                                                <option>Prevocational 1 (JSS 1)</option>
+                                                <option>Prevocational 2 (JSS 2)</option>
+                                                <option>Prevocational 3 (JSS 3)</option>
+                                                <option>Vocational 1 (SS 1)</option>
+                                                <option>Vocational 2 (SS 2)</option>
+                                                <option>Vocational 3 (SS 3)</option>
+                                            </select>
+                                            <label for="s-class">Class Applying For <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="s-prevschool" name="Previous School" placeholder="Previous School">
+                                            <label for="s-prevschool">Previous School Attended</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <select class="form-control form-select border-0" id="s-session" name="Academic Session">
+                                                <option value="" disabled selected></option>
+                                                <option>2024 / 2025</option>
+                                                <option>2025 / 2026</option>
+                                            </select>
+                                            <label for="s-session">Intended Entry Session</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Programme of Interest -->
+                                <div class="form-section-label">Programme of Interest</div>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold mb-2" style="font-size:14px;">Which track interests your child most? (select all that apply)</label>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <div class="form-check bg-light rounded px-3 py-2" style="padding-left:2.2rem!important;">
+                                                <input class="form-check-input" type="checkbox" name="Programme" value="Fashion & Sewing" id="p1">
+                                                <label class="form-check-label" style="font-size:13px;" for="p1">🧵 Fashion &amp; Sewing</label>
+                                            </div>
+                                            <div class="form-check bg-light rounded px-3 py-2" style="padding-left:2.2rem!important;">
+                                                <input class="form-check-input" type="checkbox" name="Programme" value="Construction" id="p2">
+                                                <label class="form-check-label" style="font-size:13px;" for="p2">🏗️ Construction</label>
+                                            </div>
+                                            <div class="form-check bg-light rounded px-3 py-2" style="padding-left:2.2rem!important;">
+                                                <input class="form-check-input" type="checkbox" name="Programme" value="Welding & Fabrication" id="p3">
+                                                <label class="form-check-label" style="font-size:13px;" for="p3">⚡ Welding &amp; Fabrication</label>
+                                            </div>
+                                            <div class="form-check bg-light rounded px-3 py-2" style="padding-left:2.2rem!important;">
+                                                <input class="form-check-input" type="checkbox" name="Programme" value="Automotive" id="p4">
+                                                <label class="form-check-label" style="font-size:13px;" for="p4">🚗 Automotive</label>
+                                            </div>
+                                            <div class="form-check bg-light rounded px-3 py-2" style="padding-left:2.2rem!important;">
+                                                <input class="form-check-input" type="checkbox" name="Programme" value="Robotics & Electronics" id="p5">
+                                                <label class="form-check-label" style="font-size:13px;" for="p5">🤖 Robotics &amp; Electronics</label>
+                                            </div>
+                                            <div class="form-check bg-light rounded px-3 py-2" style="padding-left:2.2rem!important;">
+                                                <input class="form-check-input" type="checkbox" name="Programme" value="Undecided" id="p6">
+                                                <label class="form-check-label" style="font-size:13px;" for="p6">🤔 Not yet decided</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Additional Info -->
+                                <div class="form-section-label">Additional Information</div>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control border-0" id="a-notes" name="Additional Notes" placeholder="Any notes" style="min-height:110px;"></textarea>
+                                            <label for="a-notes">Anything else we should know? (medical needs, special requirements, etc.)</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <select class="form-control form-select border-0" id="a-heardabout" name="How Did You Hear About Us">
+                                                <option value="" disabled selected></option>
+                                                <option>Word of mouth / Family / Friend</option>
+                                                <option>Social media</option>
+                                                <option>Flyer / Poster</option>
+                                                <option>School visit / Open day</option>
+                                                <option>Online search</option>
+                                                <option>Other</option>
+                                            </select>
+                                            <label for="a-heardabout">How did you hear about us?</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mt-4">
+                                    <p class="text-muted mb-0" style="font-size:13px;"><span class="text-danger">*</span> Required fields</p>
+                                    <button type="submit" class="btn-submit" id="btn-admission">
+                                        Submit Application <i class="fa fa-paper-plane ms-2"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- ══════════════════════════════════ -->
+                    <!--  APPOINTMENT FORM                 -->
+                    <!-- ══════════════════════════════════ -->
+                    <div id="panel-appointment" class="form-panel">
+                        <div class="appt-card">
+
+                            <div class="form-success" id="success-appointment">
+                                <div class="success-icon"><i class="fa fa-check fa-2x text-white"></i></div>
+                                <h4>Appointment Request Received!</h4>
+                                <p>Thank you! We'll confirm your appointment date and time via email or phone within 2 working days.</p>
+                            </div>
+
+                            <!--
+                                Replace YOUR_APPOINTMENT_FORM_ID with your second Formspree form ID
+                                (or use the same ID as admission if you prefer one inbox)
+                            -->
+                            <form id="form-appointment" action="https://formspree.io/f/YOUR_APPOINTMENT_FORM_ID" method="POST" novalidate>
+                                <input type="hidden" name="_subject" value="New Appointment Request — Kenlee Technical College">
+                                <input type="text" name="_gotcha" style="display:none;">
+
+                                <!-- Contact Person -->
+                                <div class="form-section-label">Your Details</div>
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <div class="form-floating guardian-highlight">
+                                            <input type="text" class="form-control border-0 bg-transparent" id="ap-name" name="Full Name" placeholder="Full Name" required>
+                                            <label for="ap-name">Your Full Name <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating guardian-highlight">
+                                            <select class="form-control form-select border-0 bg-transparent" id="ap-role" name="Your Role" required>
+                                                <option value="" disabled selected></option>
+                                                <option>Parent / Guardian</option>
+                                                <option>Prospective Student</option>
+                                                <option>Industry Partner</option>
+                                                <option>Staff / Applicant</option>
+                                                <option>Journalist / Press</option>
+                                                <option>Other</option>
+                                            </select>
+                                            <label for="ap-role">Who are you? <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control border-0" id="ap-email" name="Email" placeholder="Email" required>
+                                            <label for="ap-email">Email Address <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control border-0" id="ap-phone" name="Phone Number" placeholder="Phone" required>
+                                            <label for="ap-phone">Phone Number <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Appointment Details -->
+                                <div class="form-section-label">Appointment Details</div>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold mb-2" style="font-size:14px;">Purpose of visit <span class="text-danger">*</span></label>
+                                        <div class="radio-group">
+                                            <label class="radio-card">
+                                                <input type="radio" name="Purpose" value="School Tour" required>
+                                                <span class="rc-icon">🏫</span>
+                                                <span class="rc-label">School Tour</span>
+                                            </label>
+                                            <label class="radio-card">
+                                                <input type="radio" name="Purpose" value="Admission Enquiry">
+                                                <span class="rc-icon">📋</span>
+                                                <span class="rc-label">Admission Enquiry</span>
+                                            </label>
+                                            <label class="radio-card">
+                                                <input type="radio" name="Purpose" value="Meet a Teacher">
+                                                <span class="rc-icon">👩‍🏫</span>
+                                                <span class="rc-label">Meet a Teacher</span>
+                                            </label>
+                                            <label class="radio-card">
+                                                <input type="radio" name="Purpose" value="General Meeting">
+                                                <span class="rc-icon">🤝</span>
+                                                <span class="rc-label">General Meeting</span>
+                                            </label>
+                                            <label class="radio-card">
+                                                <input type="radio" name="Purpose" value="Other">
+                                                <span class="rc-icon">💬</span>
+                                                <span class="rc-label">Other</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control border-0" id="ap-date" name="Preferred Date">
+                                            <label for="ap-date">Preferred Date</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <select class="form-control form-select border-0" id="ap-time" name="Preferred Time">
+                                                <option value="" disabled selected></option>
+                                                <option>8:00 AM – 9:00 AM</option>
+                                                <option>9:00 AM – 10:00 AM</option>
+                                                <option>10:00 AM – 11:00 AM</option>
+                                                <option>11:00 AM – 12:00 PM</option>
+                                                <option>1:00 PM – 2:00 PM</option>
+                                                <option>2:00 PM – 3:00 PM</option>
+                                                <option>3:00 PM – 4:00 PM</option>
+                                            </select>
+                                            <label for="ap-time">Preferred Time Slot</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control border-0" id="ap-message" name="Message" placeholder="Message" style="min-height:110px;" required></textarea>
+                                            <label for="ap-message">Briefly describe the reason for your visit <span class="text-danger">*</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 mt-4">
+                                    <p class="text-muted mb-0" style="font-size:13px;"><span class="text-danger">*</span> Required fields</p>
+                                    <button type="submit" class="btn-submit" id="btn-appointment">
+                                        Book Appointment <i class="fa fa-calendar-check ms-2"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ── RIGHT: Sidebar ── -->
+                <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+
+                    <!-- What to bring -->
+                    <div class="side-card" style="background:#4f768e;">
+                        <h5 class="text-white"><i class="fa fa-folder-open me-1"></i> Documents to Bring</h5>
+                        <ul class="checklist">
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> Guardian's valid ID (NIN, driver's licence, etc.)</li>
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> Student's birth certificate</li>
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> Last school report card or result</li>
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> 2 passport-sized photographs of the student</li>
+                            <li class="text-white-50"><i class="fa fa-check-circle text-white"></i> BECE / Primary school leaving certificate (if applicable)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Admission dates -->
+                    <div class="side-card" style="background:#5a4d4d;">
+                        <h5 class="text-white"><i class="fa fa-calendar-alt me-1"></i> Admission Timeline</h5>
+                        <ul>
+                            <li class="text-white-50"><i class="fa fa-circle text-white" style="font-size:8px;margin-top:5px;"></i><span>Applications open — <strong class="text-white">August 2026</strong></span></li>
+                            <li class="text-white-50"><i class="fa fa-circle text-white" style="font-size:8px;margin-top:5px;"></i><span>Entrance assessment — <strong class="text-white">CBT</strong></span></li>
+                            <li class="text-white-50"><i class="fa fa-circle text-white" style="font-size:8px;margin-top:5px;"></i><span>Results communicated to guardian — <strong class="text-white">Within 5 days</strong></span></li>
+                            <li class="text-white-50"><i class="fa fa-circle text-white" style="font-size:8px;margin-top:5px;"></i><span>Term begins — <strong class="text-white">September 2026</strong></span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="side-card bg-light">
+                        <h5 style="color:#4f768e;"><i class="fa fa-headset me-1"></i> Admissions Office</h5>
+                        <ul>
+                            <li style="color:#2e2828; border-color:#e8e0db;">
+                                <i class="fa fa-envelope" style="color:#fe5d37;"></i>
+                                kenleetechnical@gmail.com
+                            </li>
+                            <li style="color:#2e2828; border-color:#e8e0db;">
+                                <i class="fa fa-phone-alt" style="color:#fe5d37;"></i>
+                                +234 810 063 1111
+                            </li>
+                            <li style="color:#2e2828; border-color:#e8e0db;">
+                                <i class="fa fa-map-marker-alt" style="color:#fe5d37;"></i>
+                                NO. 9, Lane P, Eliminingwe Housing Estate, Elelenwo
+                            </li>
+                            <li style="color:#2e2828; border-color:transparent;">
+                                <i class="fa fa-clock" style="color:#fe5d37;"></i>
+                                Mon – Fri &nbsp;|&nbsp; 8:00 AM – 4:00 PM
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- FAQ teaser -->
+                    <div class="side-card" style="background:#fff8f0; border:1.5px solid #fe5d37;">
+                        <h5 style="color:#fe5d37;"><i class="fa fa-question-circle me-1"></i> Have Questions?</h5>
+                        <p style="font-size:13px; color:#5a4d4d; margin-bottom:14px;">Check our FAQ section for quick answers about fees, transport, facilities, and more.</p>
+                        <a href="index.html#faq" class="btn btn-sm w-100" style="background:#fe5d37; color:#fff; border-radius:8px; font-weight:700; font-size:13px;">View FAQs <i class="fa fa-arrow-right ms-1"></i></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="lib/wow/wow.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    /* ── Load shared components ── */
+    function loadComponent(id, file) {
+        fetch(file).then(r => r.text()).then(html => {
+            document.getElementById(id).innerHTML = html;
+            if (id === 'navbar') {
+                const cur = window.location.pathname.split('/').pop();
+                document.querySelectorAll('.nav-link, .dropdown-item').forEach(l => {
+                    if (l.getAttribute('href') === cur) l.classList.add('active');
+                });
+            }
+        });
+    }
+    loadComponent('navbar', 'navbar.html');
+    loadComponent('footer', 'footer.html');
+
+    /* ── Tab switcher ── */
+    function switchTab(name, btn) {
+        document.querySelectorAll('.appt-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('panel-' + name).classList.add('active');
+    }
+
+    /* ── AJAX form handler (reusable for both forms) ── */
+    function wireForm(formId, btnId, successId) {
+        const form    = document.getElementById(formId);
+        const btn     = document.getElementById(btnId);
+        const success = document.getElementById(successId);
+        const origTxt = btn.innerHTML;
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            if (!form.checkValidity()) { form.reportValidity(); return; }
+
+            btn.innerHTML = 'Sending… <i class="fa fa-spinner fa-spin ms-2"></i>';
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (res.ok) {
+                    form.style.display = 'none';
+                    success.style.display = 'block';
+                    success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    btn.innerHTML = origTxt;
+                    btn.disabled = false;
+                    alert('Something went wrong. Please try again or email kenleetechnical@gmail.com directly.');
+                }
+            } catch {
+                btn.innerHTML = origTxt;
+                btn.disabled = false;
+                alert('Network error. Please check your connection and try again.');
+            }
+        });
+    }
+
+    wireForm('form-admission',   'btn-admission',   'success-admission');
+    wireForm('form-appointment', 'btn-appointment', 'success-appointment');
+
+    /* ── Set min date on date pickers to today ── */
+    const today = new Date().toISOString().split('T')[0];
+    document.querySelectorAll('input[type="date"]').forEach(d => d.setAttribute('min', today));
+</script>
+
+</body>
+</html>
