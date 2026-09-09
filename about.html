@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@600&family=Lobster+Two:wght@700&family=Caveat:wght@600;700&display=swap"
         rel="stylesheet">
 
     <!-- Icon Font -->
@@ -27,7 +27,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="css/navbar.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
-    
+
 </head>
 
 <body>
@@ -93,6 +93,90 @@
             </div>
         </div>
     </section>
+
+    <!-- ═══════════════════════════════════════════
+         GALLERY — Scrapbook of Practical Sessions
+    ═══════════════════════════════════════════ -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+
+            <div class="gallery-header fade-up">
+                <span class="eyebrow">Life In The Workshop</span>
+                <h1>Moments From Our Practical Sessions</h1>
+                <p>A peek into the hands-on training that shapes every KTC student — from the workshop floor to the classroom and everywhere in between.</p>
+            </div>
+
+            <div class="gallery-grid">
+
+                <button class="polaroid fade-up" style="--rot:-6deg;" data-full="img/electrical_practical.jpeg" data-caption="Wiring up circuits in Electrical Installation class">
+                    <span class="polaroid__pin"><i class="fa fa-thumbtack"></i></span>
+                    <img src="img/electrical_practical.jpeg" alt="Electrical installation practice">
+                    <span class="polaroid__caption">Wiring it up ⚡</span>
+                </button>
+
+                <button class="polaroid fade-up delay-1" style="--rot:4deg;" data-full="img/cutting-wood-practical.jpeg" data-caption="Hands-on carpentry and woodwork session">
+                    <span class="polaroid__pin"><i class="fa fa-thumbtack"></i></span>
+                    <img src="img/cutting-wood-practical.jpeg" alt="Carpentry practical session">
+                    <span class="polaroid__caption">Measure twice, cut once 🪚</span>
+                </button>
+
+                <button class="polaroid fade-up delay-2" style="--rot:-3deg;" data-full="img/building_practical1.jpeg" data-caption="Students on-site during a construction practical">
+                    <span class="polaroid__pin"><i class="fa fa-thumbtack"></i></span>
+                    <img src="img/building_practical1.jpeg" alt="Construction practical training">
+                    <span class="polaroid__caption">Building the future 🧱</span>
+                </button>
+
+                <button class="polaroid fade-up delay-3" style="--rot:5deg;" data-full="img/edited_fabric_practical.png" data-caption="Fashion and design students at the sewing table">
+                    <span class="polaroid__pin"><i class="fa fa-thumbtack"></i></span>
+                    <img src="img/edited_fabric_practical.png" alt="Fashion and fabric practical">
+                    <span class="polaroid__caption">Stitch by stitch 🧵</span>
+                </button>
+
+                <button class="polaroid fade-up delay-1" style="--rot:-5deg;" data-full="img/edited_car_practical.png" data-caption="Auto mechanics students working under the hood">
+                    <span class="polaroid__pin"><i class="fa fa-thumbtack"></i></span>
+                    <img src="img/edited_car_practical.png" alt="Auto mechanics practical">
+                    <span class="polaroid__caption">Under the hood 🚗</span>
+                </button>
+
+                <button class="polaroid fade-up delay-2" style="--rot:3deg;" data-full="img/cbt_edited_ai.png" data-caption="Students taking a computer-based test">
+                    <span class="polaroid__pin"><i class="fa fa-thumbtack"></i></span>
+                    <img src="img/cement_practical.jpeg" alt="Computer-based test session">
+                    <span class="polaroid__caption">Focus mode 💻</span>
+                </button>
+
+                <button class="polaroid fade-up delay-3" style="--rot:-4deg;" data-full="img/edited_practical.png" data-caption="Practical skills training in progress">
+                    <span class="polaroid__pin"><i class="fa fa-thumbtack"></i></span>
+                    <img src="img/robotics2.jpeg" alt="General practical training">
+                    <span class="polaroid__caption">Testing</span>
+                </button>
+
+                <button class="polaroid fade-up delay-1" style="--rot:6deg;" data-full="img/end_of_year_dance.jpeg" data-caption="Students celebrating at the end of year event">
+                    <span class="polaroid__pin"><i class="fa fa-thumbtack"></i></span>
+                    <img src="img/end_of_year_dance.jpeg" alt="End of year celebration">
+                    <span class="polaroid__caption">Making memories 🎉</span>
+                </button>
+
+                <button class="polaroid fade-up delay-2" style="--rot:-2deg;" data-full="img/edited_library.png" data-caption="Quiet study time in the school library">
+                    <span class="polaroid__pin"><i class="fa fa-thumbtack"></i></span>
+                    <img src="img/car_practical.jpeg" alt="Students in the library">
+                    <span class="polaroid__caption">Learning by doing 🔧</span>
+                </button>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="gallery-lightbox" id="gallery-lightbox">
+        <button class="gallery-lightbox__close" id="gallery-lightbox-close" aria-label="Close">
+            <i class="fa fa-times"></i>
+        </button>
+        <figure>
+            <img id="gallery-lightbox-img" src="" alt="">
+            <figcaption id="gallery-lightbox-caption"></figcaption>
+        </figure>
+    </div>
 
     <!-- CTA Section -->
     <section class="cta-section">
@@ -160,6 +244,36 @@
         }, { threshold: 0.15 });
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Gallery lightbox
+        (function () {
+            const lightbox    = document.getElementById('gallery-lightbox');
+            const lightboxImg = document.getElementById('gallery-lightbox-img');
+            const lightboxCap = document.getElementById('gallery-lightbox-caption');
+            const closeBtn    = document.getElementById('gallery-lightbox-close');
+
+            document.querySelectorAll('.polaroid').forEach(function (card) {
+                card.addEventListener('click', function () {
+                    lightboxImg.src = card.getAttribute('data-full');
+                    lightboxCap.textContent = card.getAttribute('data-caption') || '';
+                    lightbox.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function closeLightbox() {
+                lightbox.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            closeBtn.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', function (e) {
+                if (e.target === lightbox) closeLightbox();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeLightbox();
+            });
+        })();
     </script>
 
 </body>

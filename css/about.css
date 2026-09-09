@@ -17,6 +17,7 @@
   --ff-display: 'Lobster Two', cursive;
   --ff-heading: 'Inter', sans-serif;
   --ff-body:    'Heebo', sans-serif;
+  --ff-hand:    'Caveat', cursive;
 
   --radius-sm:  8px;
   --radius-md:  16px;
@@ -234,6 +235,205 @@ a:hover { color: var(--clr-primary-dk); }
   box-shadow: var(--shadow-lg);
 }
 
+/* ============================================================
+   GALLERY — Polaroid Scrapbook
+   ============================================================ */
+.gallery-section {
+  padding-block: var(--section-py);
+  background: var(--clr-light-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle corkboard-style dot texture */
+.gallery-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(15,23,42,.05) 1px, transparent 1px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+
+.gallery-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto clamp(2.5rem, 6vw, 3.75rem);
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-header .eyebrow {
+  display: inline-block;
+  font-family: var(--ff-heading);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--clr-primary);
+  margin-bottom: .6rem;
+}
+
+.gallery-header h1 {
+  font-family: var(--ff-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: var(--clr-dark);
+  margin-bottom: .85rem;
+}
+
+.gallery-header p {
+  color: var(--clr-muted);
+  font-size: .95rem;
+  line-height: 1.8;
+}
+
+/* Grid */
+.gallery-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.75rem) clamp(1rem, 2vw, 1.75rem);
+  padding-block: .5rem 1rem;
+}
+
+/* Polaroid card */
+.polaroid {
+  --rot: 0deg;
+  appearance: none;
+  border: none;
+  background: #fff;
+  padding: .85rem .85rem 1.5rem;
+  border-radius: 4px;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  font-family: inherit;
+  transform: rotate(var(--rot));
+  transition: transform var(--transition), box-shadow var(--transition), z-index 0s;
+  position: relative;
+  text-align: center;
+}
+
+.polaroid:hover,
+.polaroid:focus-visible {
+  transform: rotate(0deg) translateY(-8px) scale(1.04);
+  box-shadow: var(--shadow-lg);
+  z-index: 5;
+  outline: none;
+}
+
+.polaroid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-bottom: .85rem;
+  pointer-events: none;
+}
+
+.polaroid__caption {
+  display: block;
+  font-family: var(--ff-hand);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--clr-dark);
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+/* Little pin at the top */
+.polaroid__pin {
+  position: absolute;
+  top: -.6rem;
+  left: 50%;
+  transform: translateX(-50%) rotate(-15deg);
+  width: 30px;
+  height: 30px;
+  background: var(--clr-primary);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  box-shadow: 0 3px 8px rgba(0,0,0,.25);
+  pointer-events: none;
+}
+
+/* Slight alternating tint on pins for variety */
+.polaroid:nth-child(3n+2) .polaroid__pin { background: #38bdf8; }
+.polaroid:nth-child(3n+3) .polaroid__pin { background: #0f172a; }
+
+/* ---------- Lightbox ---------- */
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .3s ease, visibility .3s ease;
+  z-index: 10000;
+}
+
+.gallery-lightbox.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gallery-lightbox figure {
+  max-width: min(90vw, 700px);
+  text-align: center;
+  transform: scale(.92);
+  transition: transform .3s ease;
+}
+
+.gallery-lightbox.open figure {
+  transform: scale(1);
+}
+
+.gallery-lightbox img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  background: #000;
+}
+
+.gallery-lightbox figcaption {
+  font-family: var(--ff-hand);
+  font-size: 1.4rem;
+  color: #fff;
+  margin-top: 1.25rem;
+}
+
+.gallery-lightbox__close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.75rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.gallery-lightbox__close:hover {
+  background: var(--clr-primary);
+  transform: rotate(90deg);
+}
+
 /* ---------- CTA Section ---------- */
 .cta-section {
   padding-block: var(--section-py);
@@ -340,8 +540,13 @@ a:hover { color: var(--clr-primary-dk); }
 }
 .fade-up.delay-1 { transition-delay: .15s; }
 .fade-up.delay-2 { transition-delay: .35s; }
+.fade-up.delay-3 { transition-delay: .5s; }
 
 /* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
 @media (max-width: 900px) {
   .about-grid,
   .cta-card {
@@ -356,7 +561,12 @@ a:hover { color: var(--clr-primary-dk); }
   .cta-image { min-height: 280px; }
 }
 
+@media (max-width: 700px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 560px) {
   .about-images .img-top img { width: 80%; }
   .about-actions { flex-direction: column; align-items: flex-start; }
+  .gallery-grid { gap: 2rem 1rem; }
 }
