@@ -1,0 +1,219 @@
+/* ═══════════════════════════════════════════════════════════════
+   KENLEE TECHNICAL COLLEGE — footer.css
+   No Bootstrap. Targets the exact footer.html markup.
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Footer Shell ──────────────────────────────────────────── */
+.footer {
+    background: #103741;       /* --dark */
+    color: rgba(255, 255, 255, .55);
+    padding-top: 64px;
+    margin-top: 64px;
+    font-size: .9rem;
+    line-height: 1.75;
+}
+
+/* ── Inner Container ───────────────────────────────────────── */
+.footer .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.footer .container.py-5 {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+/* ── Four-column grid ──────────────────────────────────────── */
+.footer .row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+/* ── Column headings ───────────────────────────────────────── */
+.footer h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: .02em;
+}
+
+/* ── Contact info paragraphs ───────────────────────────────── */
+.footer p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.footer p i {
+    color: #FE5D37;        /* --primary */
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 16px;
+    text-align: center;
+}
+
+/* ── Social icons ──────────────────────────────────────────── */
+.footer .d-flex {
+    display: flex;
+    gap: 10px;
+    padding-top: 12px;
+    flex-wrap: wrap;
+}
+
+.footer .btn-social {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, .6);
+    font-size: .85rem;
+    text-decoration: none;
+    transition: background .25s ease, border-color .25s ease, color .25s ease;
+    flex-shrink: 0;
+}
+
+.footer .btn-social:hover {
+    background: #FE5D37;
+    border-color: #FE5D37;
+    color: #fff;
+}
+
+/* ── Quick Links ───────────────────────────────────────────── */
+.footer .btn-link {
+    display: block;
+    padding: 4px 0;
+    color: rgba(255, 255, 255, .55);
+    text-decoration: none;
+    font-size: .9rem;
+    font-weight: 400;
+    background: none;
+    border: none;
+    transition: color .2s ease, padding-left .2s ease;
+    width: fit-content;
+}
+
+.footer .btn-link::before {
+    content: "›";
+    margin-right: 8px;
+    color: #FE5D37;
+}
+
+.footer .btn-link:hover {
+    color: #fff;
+    padding-left: 4px;
+}
+
+/* ── Photo Gallery grid ────────────────────────────────────── */
+.footer .row.g-2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding-top: 8px;
+}
+
+.footer .col-4 {
+    /* already handled by grid above */
+}
+
+.footer .img-fluid {
+    width: 100%;
+    height: 72px;
+    object-fit: cover;
+    display: block;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, .08);
+    padding: 3px;
+    transition: opacity .2s ease, transform .2s ease;
+}
+
+.footer .img-fluid:hover {
+    opacity: .85;
+    transform: scale(1.04);
+}
+
+/* ── Copyright bar ─────────────────────────────────────────── */
+.footer .copyright {
+    border-top: 1px solid rgba(255, 255, 255, .1);
+    padding: 20px 0;
+    margin-top: 0;
+}
+
+.footer .copyright .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    grid-template-columns: unset; /* override the 3-col grid above */
+}
+
+.footer .copyright a {
+    color: rgba(255, 255, 255, .7);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, .3);
+    transition: color .2s ease;
+}
+
+.footer .copyright a:hover {
+    color: #FE5D37;
+    border-bottom-color: #FE5D37;
+}
+
+/* ── Footer menu (copyright row right side) ────────────────── */
+.footer-menu {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.footer-menu a {
+    color: rgba(255, 255, 255, .55) !important;
+    text-decoration: none !important;
+    border: none !important;
+    padding: 4px 10px;
+    font-size: .85rem;
+    transition: color .2s ease;
+}
+
+.footer-menu a:hover {
+    color: #fff !important;
+}
+
+.footer-menu a + a::before {
+    content: "|";
+    margin-right: 4px;
+    color: rgba(255, 255, 255, .2);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+    .footer .row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer .row {
+        grid-template-columns: 1fr;
+    }
+
+    .footer .copyright .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-menu {
+        justify-content: center;
+    }
+}

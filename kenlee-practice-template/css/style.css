@@ -298,6 +298,8 @@ nav.navbar.navbar-expand-lg.sticky-top.px-4.px-lg-5.py-lg-0 {
 .page-header {
     background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), url(../img/school_front.jpg) center center no-repeat;
     background-size: cover;
+    position: relative;
+    padding-block: clamp(3.5rem, 8vw, 6rem);
 }
 
 .breadcrumb-item + .breadcrumb-item::before {

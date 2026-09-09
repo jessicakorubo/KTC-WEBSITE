@@ -16,313 +16,71 @@
 
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Site styles -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
-    <style>
-        /* ═══════════════════════════════════════════
-           WHO WE ARE SECTION
-        ═══════════════════════════════════════════ */
-        :root {
-            --wwa-primary: #FE5D37;
-            --wwa-brown:   #8B4513;
-            --wwa-dark:    #103741;
-        }
-
-        .wwa-section {
-            position: relative;
-            padding: 90px 0 0;
-            background: #f4eeec;
-            overflow: hidden;
-        }
-        .wwa-section::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(circle, rgba(103,0,0,.13) 1px, transparent 1px);
-            background-size: 28px 28px;
-            pointer-events: none;
-        }
-        .wwa-section::after {
-            content: "";
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 80px;
-            background: var(--wwa-dark);
-            clip-path: polygon(0 100%, 100% 0, 100% 100%);
-        }
-        .wwa-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 2;
-        }
-        .wwa-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: end;
-            margin-bottom: 64px;
-        }
-        @media (max-width: 768px) {
-            .wwa-header { grid-template-columns: 1fr; gap: 24px; }
-        }
-        .wwa-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: .72rem;
-            font-weight: 700;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            color: var(--wwa-primary);
-            margin-bottom: 16px;
-        }
-        .wwa-eyebrow::before {
-            content: "";
-            display: block;
-            width: 32px; height: 2px;
-            background: var(--wwa-primary);
-        }
-        .wwa-headline {
-            font-family: 'Lobster Two', cursive;
-            font-size: clamp(2.4rem, 5vw, 3.6rem);
-            color: var(--wwa-dark);
-            line-height: 1.1;
-            letter-spacing: -.02em;
-        }
-        .wwa-headline em {
-            font-style: normal;
-            color: var(--wwa-primary);
-            position: relative;
-        }
-        .wwa-headline em::after {
-            content: "";
-            position: absolute;
-            left: 0; bottom: -4px;
-            width: 100%; height: 4px;
-            background: var(--wwa-brown);
-            border-radius: 2px;
-        }
-        .wwa-header__right p {
-            font-size: 1rem;
-            line-height: 1.85;
-            color: #5a4a45;
-        }
-        .wwa-accreditation {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-            padding: 8px 18px;
-            background: var(--wwa-dark);
-            color: #fff;
-            font-size: .78rem;
-            font-weight: 700;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            border-radius: 2px;
-        }
-        .wwa-accreditation i { color: var(--wwa-primary); }
-        .wwa-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
-            border: 1px solid rgba(103,0,0,.15);
-            border-radius: 6px 6px 0 0;
-            overflow: hidden;
-        }
-        @media (max-width: 768px) {
-            .wwa-cards { grid-template-columns: 1fr; }
-        }
-        .wwa-card {
-            position: relative;
-            background: #fff;
-            padding: 44px 36px 48px;
-            border-right: 1px solid rgba(103,0,0,.12);
-            overflow: hidden;
-            transition: background .35s ease;
-        }
-        .wwa-card:last-child { border-right: none; }
-        .wwa-card:hover { background: var(--wwa-dark); }
-        .wwa-card:hover .wwa-card__title,
-        .wwa-card:hover .wwa-card__subtitle,
-        .wwa-card:hover .wwa-card__body  { color: #fff; }
-        .wwa-card:hover .wwa-card__icon  { background: var(--wwa-primary); color: #fff; }
-        .wwa-card:hover .wwa-card__num   { color: rgba(255,255,255,.06); }
-        .wwa-card:hover .wwa-card__bar   { background: var(--wwa-primary); }
-        .wwa-card__num {
-            position: absolute;
-            bottom: -10px; right: 12px;
-            font-family: 'Lobster Two', cursive;
-            font-size: 7rem;
-            font-weight: 700;
-            line-height: 1;
-            color: rgba(103,0,0,.05);
-            user-select: none;
-            transition: color .35s;
-        }
-        .wwa-card__bar {
-            width: 48px; height: 4px;
-            border-radius: 2px;
-            margin-bottom: 28px;
-            transition: background .35s;
-        }
-        .wwa-card:nth-child(1) .wwa-card__bar { background: var(--wwa-primary); }
-        .wwa-card:nth-child(2) .wwa-card__bar { background: var(--wwa-dark); }
-        .wwa-card:nth-child(3) .wwa-card__bar { background: var(--wwa-brown); }
-        .wwa-card__icon {
-            width: 56px; height: 56px;
-            border-radius: 6px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; color: #fff;
-            margin-bottom: 24px;
-            transition: background .35s;
-        }
-        .wwa-card:nth-child(1) .wwa-card__icon { background: var(--wwa-primary); }
-        .wwa-card:nth-child(2) .wwa-card__icon { background: var(--wwa-dark); }
-        .wwa-card:nth-child(3) .wwa-card__icon { background: var(--wwa-brown); }
-        .wwa-card__title {
-            font-family: 'Lobster Two', cursive;
-            font-size: 1.5rem;
-            color: var(--wwa-dark);
-            margin-bottom: 4px;
-            transition: color .35s;
-        }
-        .wwa-card__subtitle {
-            font-size: .78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: .14em;
-            color: var(--wwa-primary);
-            margin-bottom: 16px;
-            transition: color .35s;
-        }
-        .wwa-card__body {
-            font-size: .95rem;
-            line-height: 1.8;
-            color: #666;
-            position: relative; z-index: 1;
-            transition: color .35s;
-        }
-        .wwa-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            background: var(--wwa-dark);
-            position: relative; z-index: 3;
-        }
-        @media (max-width: 600px) {
-            .wwa-stats { grid-template-columns: repeat(2, 1fr); }
-        }
-        .wwa-stat {
-            padding: 28px 20px;
-            text-align: center;
-            border-right: 1px solid rgba(255,255,255,.1);
-        }
-        .wwa-stat:last-child { border-right: none; }
-        .wwa-stat__num {
-            display: block;
-            font-family: 'Lobster Two', cursive;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--wwa-primary);
-            line-height: 1;
-            margin-bottom: 6px;
-        }
-        .wwa-stat__label {
-            display: block;
-            font-size: .7rem;
-            text-transform: uppercase;
-            letter-spacing: .14em;
-            color: rgba(255,255,255,.5);
-        }
-
-        /* ═══════════════════════════════════════════
-           CONTACT FORM (homepage quick contact)
-        ═══════════════════════════════════════════ */
-        .home-contact-form .form-control:focus {
-            border-color: #4f768e;
-            box-shadow: 0 0 0 3px rgba(79,118,142,0.15);
-        }
-        #home-form-success {
-            display: none;
-            background: #d6e6ef;
-            border: 1px solid #4f768e;
-            border-radius: 10px;
-            padding: 24px;
-            text-align: center;
-        }
-        #home-form-success h5 { color: #3a5f75; font-weight: 700; }
-    </style>
+    <!-- Page stylesheet (no Bootstrap) -->
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/navbar.css" rel="stylesheet">
+    <link href="css/footer.css" rel="stylesheet">
 </head>
 
 <body>
-<div class="container-xxl bg-white p-0">
+<div class="page-wrapper">
 
     <!-- ── Spinner ───────────────────────────────────────── -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width:3rem;height:3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
+    <div id="spinner" class="spinner-overlay">
+        <div class="spinner-ring"></div>
     </div>
 
     <!-- ── Navbar ────────────────────────────────────────── -->
     <div id="navbar"></div>
 
     <!-- ── Hero Carousel ─────────────────────────────────── -->
-    <div class="container-fluid p-0 mb-5">
-        <div class="owl-carousel header-carousel position-relative">
+    <div class="hero-carousel">
+        <div class="owl-carousel header-carousel">
 
-            <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/ai_edited_Website_bg.png" alt="">
-                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background:rgba(0,0,0,.2);">
-                    <div class="container">
-                        <div class="row justify-content-start">
-                            <div class="col-10 col-lg-8">
-                                <h1 class="display-2 text-white animated slideInDown mb-4">Learn, Build, Succeed!</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">We carve out futures from applied knowledge.</p>
-                                <a href="appointment.html" class="btn btn-primary rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft">Apply Today!</a>
-                            </div>
+            <div class="owl-carousel-item">
+                <img src="img/cutting-wood-practical.jpeg" alt="">
+                <div class="hero-overlay">
+                    <div class="hero-content">
+                        <h1 class="animated slideInDown">Building Tomorrow's Innovators</h1>
+                        <p>We carve out futures from applied knowledge.</p>
+                        <div class="hero-actions">
+                            <a href="appointment.html" class="btn btn--primary animated slideInLeft">Apply Today!</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/school_side.jpg" alt="">
-                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background:rgba(0,0,0,.2);">
-                    <div class="container">
-                        <div class="row justify-content-start">
-                            <div class="col-10 col-lg-8">
-                                <h1 class="display-2 text-white animated slideInDown mb-4">Building Tomorrow's Innovators</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">Discover, Learn, Succeed — With our help!</p>
-                                <a href="contact.html" class="btn btn-primary rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft">Contact Us</a>
-                                <a href="appointment.html" class="btn btn-dark rounded-pill py-sm-3 px-sm-5 animated slideInRight">Join Us</a>
-                            </div>
+            <div class="owl-carousel-item">
+                <img src="img/ai_edited_students_learning.png" alt="">
+                <div class="hero-overlay">
+                    <div class="hero-content">
+                        <h1 class="animated slideInDown">Learn, build, succeed.</h1>
+                        <p>Discover, Learn, Succeed — With our help!</p>
+                        <div class="hero-actions">
+                            <a href="contact.html"     class="btn btn--primary animated slideInLeft">Contact Us</a>
+                            <a href="appointment.html" class="btn btn--dark    animated slideInRight">Join Us</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="img/school_front.jpg" alt="">
-                <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background:rgba(0,0,0,.2);">
-                    <div class="container">
-                        <div class="row justify-content-start">
-                            <div class="col-10 col-lg-8">
-                                <h1 class="display-2 text-white animated slideInDown mb-4">Knowledge and Skills</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-2">We promote excellence and diversity.</p>
-                                <a href="#who_we_are" class="btn btn-primary rounded-pill py-sm-3 px-sm-5 me-3 animated slideInLeft">Learn More</a>
-                                <a href="curriculum.html" class="btn btn-dark rounded-pill py-sm-3 px-sm-5 animated slideInRight">Our Curriculum</a>
-                            </div>
+            <div class="owl-carousel-item">
+                <img src="img/school_front.jpg" alt="">
+                <div class="hero-overlay">
+                    <div class="hero-content">
+                        <h1 class="animated slideInDown">Knowledge and Skills</h1>
+                        <p>We promote excellence and diversity.</p>
+                        <div class="hero-actions">
+                            <a href="#who_we_are"      class="btn btn--primary animated slideInLeft">Learn More</a>
+                            <a href="curriculum.html"  class="btn btn--dark    animated slideInRight">Our Curriculum</a>
                         </div>
                     </div>
                 </div>
@@ -403,345 +161,283 @@
 
 
     <!-- ── About / Build Practical Skills ───────────────── -->
-    <div class="container-xxl py-5">
+    <section class="about-section">
         <div class="container">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <h1 class="mb-4">Build Practical Skills for Real-World Careers</h1>
+            <div class="about-grid">
+
+                <div class="about-text wow fadeInUp" data-wow-delay="0.1s">
+                    <h1>Build Practical Skills for Real-World Careers</h1>
                     <p>At KTC, we focus on hands-on training that prepares students for today's in-demand industries. Our programs are designed to equip you with the technical knowledge and practical experience needed to succeed in fields like engineering, information technology, construction, and applied sciences.</p>
-                    <p class="mb-4">With modern workshops, experienced instructors, and industry-relevant curriculum, we ensure every student graduates job-ready. Whether you're starting your career or upgrading your skills, our courses combine theory with real-world application to help you achieve your professional goals.</p>
-                    <div class="row g-4 align-items-center">
-                        <div class="col-sm-6">
-                            <a class="btn btn-primary rounded-pill py-3 px-5" href="about.html">Read More</a>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle flex-shrink-0" src="img/KTC-director_pic.jpg" alt="Founder" style="width:45px;height:45px;object-fit:cover;">
-                                <div class="ms-3">
-                                    <h6 class="text-primary mb-1">Barineka Kenneth Lee</h6>
-                                    <small>CEO &amp; Founder</small>
-                                </div>
+                    <p>With modern workshops, experienced instructors, and industry-relevant curriculum, we ensure every student graduates job-ready. Whether you're starting your career or upgrading your skills, our courses combine theory with real-world application to help you achieve your professional goals.</p>
+                    <div class="about-cta">
+                        <a class="btn btn--primary" href="about.html">Read More</a>
+                        <div class="founder-card">
+                            <img src="img/KTC-director_pic.jpg" alt="Founder">
+                            <div>
+                                <h6>Barineka Kenneth Lee</h6>
+                                <small>CEO &amp; Founder</small>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 about-img wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <img class="img-fluid w-75 rounded-circle bg-light p-3" src="img/edited_car_practical.png" alt="Car practical">
+
+                <div class="about-images wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="about-images__grid">
+                        <div class="about-images__top">
+                            <img src="img/edited_car_practical.png" alt="Car practical">
                         </div>
-                        <div class="col-6 text-start" style="margin-top:-150px;">
-                            <img class="img-fluid w-100 rounded-circle bg-light p-3" src="img/edited_fabric_practical.png" alt="Fabric practical">
-                        </div>
-                        <div class="col-6 text-end" style="margin-top:-150px;">
-                            <img class="img-fluid w-100 rounded-circle bg-light p-3" src="img/edited_practical.png" alt="Practical">
+                        <div class="about-images__bottom">
+                            <img src="img/edited_fabric_practical.png" alt="Fabric practical">
+                            <img src="img/edited_practical.png" alt="Practical">
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
+    </section>
     <!-- About End -->
 
 
     <!-- ── Become a Teacher CTA ──────────────────────────── -->
-    <div class="container-xxl py-5">
+    <section class="teacher-section">
         <div class="container">
-            <div class="bg-light rounded">
-                <div class="row g-0">
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s" style="min-height:400px;">
-                        <div class="position-relative h-100">
-                            <img class="position-absolute w-100 h-100 rounded" src="img/become_teacher.png" style="object-fit:cover;" alt="Become a teacher">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                        <div class="h-100 d-flex flex-column justify-content-center p-5">
-                            <h1 class="mb-4">Become A Teacher</h1>
-                            <p>We are inviting qualified and passionate professionals to join our team of instructors and contribute to the development of highly skilled graduates. As an NBTE-accredited institution, we uphold high academic and technical standards.</p>
-                            <p class="mb-4">Ideal candidates should possess the required qualifications in their field, along with a strong passion for teaching and mentoring students. This is your opportunity to make a meaningful impact on the next generation.</p>
-                            <a class="btn btn-primary py-3 px-5" href="call-to-action.html">Get Started Now <i class="fa fa-arrow-right ms-2"></i></a>
-                        </div>
-                    </div>
+            <div class="teacher-card">
+                <div class="teacher-card__image wow fadeIn" data-wow-delay="0.1s">
+                    <img src="img/become_teacher.png" alt="Become a teacher">
+                </div>
+                <div class="teacher-card__content wow fadeIn" data-wow-delay="0.5s">
+                    <h1>Become A Teacher</h1>
+                    <p>We are inviting qualified and passionate professionals to join our team of instructors and contribute to the development of highly skilled graduates. As an NBTE-accredited institution, we uphold high academic and technical standards.</p>
+                    <p>Ideal candidates should possess the required qualifications in their field, along with a strong passion for teaching and mentoring students. This is your opportunity to make a meaningful impact on the next generation.</p>
+                    <a class="btn btn--primary" href="call-to-action.html">Get Started Now <i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <!-- Become a Teacher End -->
 
 
     <!-- ── Student Life ──────────────────────────────────── -->
-    <div class="container-xxl py-5">
+    <section class="student-life">
         <div class="container">
 
-            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width:600px;">
-                <h4 class="text-primary">Life at Kenlee</h4>
-                <h1 class="mb-3">Our Students in Action</h1>
+            <div class="section-header wow fadeInUp" data-wow-delay="0.1s">
+                <span class="eyebrow">Life at Kenlee</span>
+                <h1>Our Students in Action</h1>
                 <p>At Kenlee Technical College, learning goes beyond the classroom. Our students work with real tools, build real things, and grow into real professionals — every single day.</p>
             </div>
 
             <!-- Photo grid -->
-            <div class="row g-4 mb-4">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="position-relative rounded overflow-hidden" style="height:420px;">
-                        <img src="img/electrical_practical.jpeg" class="w-100 h-100" style="object-fit:cover;" alt="Students at work">
-                        <div class="position-absolute bottom-0 start-0 w-100 p-4" style="background:linear-gradient(transparent,rgba(0,0,0,0.65));">
-                            <span class="badge bg-primary px-3 py-2 mb-2">Workshop</span>
-                            <h5 class="text-white mb-0">Hands-on training is at the core of everything we do</h5>
-                        </div>
+            <div class="photo-grid">
+                <div class="photo-main wow fadeInUp" data-wow-delay="0.1s">
+                    <img src="img/electrical_practical.jpeg" alt="Students at work">
+                    <div class="photo-caption photo-caption--large">
+                        <span class="badge">Workshop</span>
+                        <h5>Hands-on training is at the core of everything we do</h5>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="row g-4">
-                        <div class="col-6 wow fadeInUp" data-wow-delay="0.2s">
-                            <div class="position-relative rounded overflow-hidden" style="height:196px;">
-                                <img src="img/cbt_edited_ai.png" class="w-100 h-100" style="object-fit:cover;" alt="CBT Exam">
-                                <div class="position-absolute bottom-0 start-0 w-100 px-3 py-2" style="background:rgba(0,0,0,0.5);">
-                                    <small class="text-white fw-semibold">CBT Exam</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="position-relative rounded overflow-hidden" style="height:196px;">
-                                <img src="img/end_of_year_dance.jpeg" class="w-100 h-100" style="object-fit:cover;" alt="Social Activities">
-                                <div class="position-absolute bottom-0 start-0 w-100 px-3 py-2" style="background:rgba(0,0,0,0.5);">
-                                    <small class="text-white fw-semibold">Social Activities</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="position-relative rounded overflow-hidden" style="height:196px;">
-                                <img src="img/building_practical1.jpeg" class="w-100 h-100" style="object-fit:cover;" alt="Construction">
-                                <div class="position-absolute bottom-0 start-0 w-100 px-3 py-2" style="background:rgba(0,0,0,0.5);">
-                                    <small class="text-white fw-semibold">Construction</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="position-relative rounded overflow-hidden" style="height:196px;">
-                                <img src="img/edited_library.png" class="w-100 h-100" style="object-fit:cover;" alt="Library">
-                                <div class="position-absolute bottom-0 start-0 w-100 px-3 py-2" style="background:rgba(0,0,0,0.5);">
-                                    <small class="text-white fw-semibold">School Library</small>
-                                </div>
-                            </div>
-                        </div>
+                <div class="photo-sub-grid">
+                    <div class="photo-thumb wow fadeInUp" data-wow-delay="0.2s">
+                        <img src="img/cbt_edited_ai.png" alt="CBT Exam">
+                        <div class="photo-caption photo-caption--small"><small>CBT Exam</small></div>
+                    </div>
+                    <div class="photo-thumb wow fadeInUp" data-wow-delay="0.3s">
+                        <img src="img/end_of_year_dance.jpeg" alt="Social Activities">
+                        <div class="photo-caption photo-caption--small"><small>Social Activities</small></div>
+                    </div>
+                    <div class="photo-thumb wow fadeInUp" data-wow-delay="0.4s">
+                        <img src="img/building_practical1.jpeg" alt="Construction">
+                        <div class="photo-caption photo-caption--small"><small>Construction</small></div>
+                    </div>
+                    <div class="photo-thumb wow fadeInUp" data-wow-delay="0.5s">
+                        <img src="img/edited_library.png" alt="Library">
+                        <div class="photo-caption photo-caption--small"><small>School Library</small></div>
                     </div>
                 </div>
             </div>
 
             <!-- Highlight cards -->
-            <div class="row g-4 mt-2">
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="bg-light rounded p-4 h-100 d-flex gap-3 align-items-start">
-                        <div class="flex-shrink-0 bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width:52px;height:52px;min-width:52px;">
-                            <i class="fa fa-users fa-lg text-white"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-2">A Thriving Community</h5>
-                            <p class="mb-0 text-muted" style="font-size:14px;">Our students come from across Rivers State and beyond, bringing diverse backgrounds together in one shared purpose — to learn, grow, and build futures.</p>
-                        </div>
+            <div class="highlight-cards">
+                <div class="highlight-card wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="highlight-card__icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div>
+                        <h5>A Thriving Community</h5>
+                        <p>Our students come from across Rivers State and beyond, bringing diverse backgrounds together in one shared purpose — to learn, grow, and build futures.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="bg-light rounded p-4 h-100 d-flex gap-3 align-items-start">
-                        <div class="flex-shrink-0 bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width:52px;height:52px;min-width:52px;">
-                            <i class="fa fa-trophy fa-lg text-white"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-2">Celebrating Achievement</h5>
-                            <p class="mb-0 text-muted" style="font-size:14px;">From project showcases to graduation ceremonies, we celebrate every milestone. Our students are recognised for hard work, creativity, and technical excellence.</p>
-                        </div>
+                <div class="highlight-card wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="highlight-card__icon">
+                        <i class="fa fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h5>Celebrating Achievement</h5>
+                        <p>From project showcases to graduation ceremonies, we celebrate every milestone. Our students are recognised for hard work, creativity, and technical excellence.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="bg-light rounded p-4 h-100 d-flex gap-3 align-items-start">
-                        <div class="flex-shrink-0 bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width:52px;height:52px;min-width:52px;">
-                            <i class="fa fa-shield-alt fa-lg text-white"></i>
-                        </div>
-                        <div>
-                            <h5 class="mb-2">Safe &amp; Supportive</h5>
-                            <p class="mb-0 text-muted" style="font-size:14px;">Student wellbeing is our priority. With a sick bay, trained staff, and a culture of respect and safety, every student can focus on what matters — learning.</p>
-                        </div>
+                <div class="highlight-card wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="highlight-card__icon">
+                        <i class="fa fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <h5>Safe &amp; Supportive</h5>
+                        <p>Student wellbeing is our priority. With a sick bay, trained staff, and a culture of respect and safety, every student can focus on what matters — learning.</p>
                     </div>
                 </div>
             </div>
 
             <!-- CTA banner -->
-            <div class="row g-4 mt-2 wow fadeInUp" data-wow-delay="0.2s">
-                <div class="col-12">
-                    <div class="position-relative rounded overflow-hidden" style="height:280px;">
-                        <img src="img/ai_edited_students_learning.png" class="w-100 h-100" style="object-fit:cover;object-position:center 40%;" alt="Campus life">
-                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" style="background:rgba(79,118,142,0.72);">
-                            <div class="text-center px-4">
-                                <h2 class="text-white mb-3">Want to see more of school life?</h2>
-                                <a href="appointment.html" class="btn btn-light rounded-pill py-2 px-5 fw-semibold">Book a School Tour</a>
-                            </div>
-                        </div>
+            <div class="life-cta wow fadeInUp" data-wow-delay="0.2s">
+                <img src="img/ai_edited_students_learning.png" alt="Campus life">
+                <div class="life-cta__overlay">
+                    <div>
+                        <h2>Want to see more of school life?</h2>
+                        <a href="appointment.html" class="btn btn--light">Book a School Tour</a>
                     </div>
                 </div>
             </div>
 
         </div>
-    </div>
+    </section>
     <!-- Student Life End -->
 
 
     <!-- ── Quick Contact Form ─────────────────────────────── -->
-    <div class="container-xxl py-5">
+    <section class="contact-section">
         <div class="container">
-            <div class="bg-light rounded">
-                <div class="row g-0">
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="h-100 d-flex flex-column justify-content-center p-5 home-contact-form">
-                            <h1 class="mb-2">Get in Touch</h1>
-                            <p class="text-muted mb-4" style="font-size:14px;">Have a quick question? Send us a message and we'll respond within 2 working days. For admissions, use our <a href="appointment.html" class="text-primary">Appointments page</a>.</p>
+            <div class="contact-card">
+                <div class="contact-card__form wow fadeIn" data-wow-delay="0.1s">
+                    <h1>Get in Touch</h1>
+                    <p>Have a quick question? Send us a message and we'll respond within 2 working days. For admissions, use our <a href="appointment.html">Appointments page</a>.</p>
 
-                            <!-- Success message -->
-                            <div id="home-form-success">
-                                <i class="fa fa-check-circle fa-2x mb-2" style="color:#4f768e;"></i>
-                                <h5>Message Sent!</h5>
-                                <p style="font-size:14px;color:#5a4d4d;">Thanks for reaching out. We'll get back to you shortly.</p>
+                    <!-- Success message -->
+                    <div id="home-form-success" class="form-success">
+                        <i class="fa fa-check-circle"></i>
+                        <h5>Message Sent!</h5>
+                        <p>Thanks for reaching out. We'll get back to you shortly.</p>
+                    </div>
+
+                    <form id="home-contact-form" action="https://formspree.io/f/YOUR_CONTACT_FORM_ID" method="POST" novalidate>
+                        <input type="hidden" name="_subject" value="New Website Enquiry — Kenlee Technical College">
+                        <input type="text"   name="_gotcha"  style="display:none;">
+
+                        <div class="form-grid">
+                            <div class="form-floating">
+                                <input type="text"  id="hc-gname" name="Guardian Name" placeholder=" " required>
+                                <label for="hc-gname">Guardian Name <span class="text-danger">*</span></label>
                             </div>
+                            <div class="form-floating">
+                                <input type="email" id="hc-email" name="Email" placeholder=" " required>
+                                <label for="hc-email">Email Address <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="text"  id="hc-child" name="Child Name" placeholder=" ">
+                                <label for="hc-child">Child's Name</label>
+                            </div>
+                            <div class="form-floating">
+                                <input type="tel"   id="hc-phone" name="Phone" placeholder=" ">
+                                <label for="hc-phone">Phone Number</label>
+                            </div>
+                            <div class="form-floating form-full">
+                                <textarea id="hc-message" name="Message" placeholder=" " required></textarea>
+                                <label for="hc-message">Your Message <span class="text-danger">*</span></label>
+                            </div>
+                            <div class="form-submit form-full">
+                                <button class="btn btn--primary btn--block" type="submit" id="hc-btn">
+                                    Send Message <i class="fa fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-                            <!--
-                                Formspree: replace YOUR_CONTACT_FORM_ID with your form ID
-                                from https://formspree.io
-                            -->
-                            <form id="home-contact-form" action="https://formspree.io/f/YOUR_CONTACT_FORM_ID" method="POST" novalidate>
-                                <input type="hidden" name="_subject" value="New Website Enquiry — Kenlee Technical College">
-                                <input type="text" name="_gotcha" style="display:none;">
-                                <div class="row g-3">
-                                    <div class="col-sm-6">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control border-0" id="hc-gname" name="Guardian Name" placeholder="Guardian Name" required>
-                                            <label for="hc-gname">Guardian Name <span class="text-danger">*</span></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-floating">
-                                            <input type="email" class="form-control border-0" id="hc-email" name="Email" placeholder="Email" required>
-                                            <label for="hc-email">Email Address <span class="text-danger">*</span></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control border-0" id="hc-child" name="Child Name" placeholder="Child Name">
-                                            <label for="hc-child">Child's Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-floating">
-                                            <input type="tel" class="form-control border-0" id="hc-phone" name="Phone" placeholder="Phone">
-                                            <label for="hc-phone">Phone Number</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <textarea class="form-control border-0" id="hc-message" name="Message" placeholder="Message" style="height:110px;" required></textarea>
-                                            <label for="hc-message">Your Message <span class="text-danger">*</span></label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3 fw-semibold" type="submit" id="hc-btn">
-                                            Send Message <i class="fa fa-paper-plane ms-2"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="min-height:400px;">
-                        <div class="position-relative h-100">
-                            <img class="position-absolute w-100 h-100 rounded" src="img/public_speaking.png" style="object-fit:cover;" alt="Contact">
-                        </div>
-                    </div>
+                <div class="contact-card__image wow fadeIn" data-wow-delay="0.5s">
+                    <img src="img/public_speaking.png" alt="Contact">
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <!-- Contact Form End -->
 
 
     <!-- ── FAQ ───────────────────────────────────────────── -->
-    <div class="container-fluid faq-section py-5" id="faq">
-        <div class="container py-5 overflow-hidden">
-            <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width:800px;">
-                <h4 class="text-primary">FAQs</h4>
-                <h1 class="display-5 mb-4">Frequently Asked Questions</h1>
-                <p class="mb-0">Welcome to our FAQ section! Here we've compiled answers to the questions we receive most often. Whether you're a prospective student, a current parent, or just curious about our school, this section is here to help. If you don't find what you're looking for, feel free to reach out to us directly.</p>
+    <section class="faq-section" id="faq">
+        <div class="container">
+
+            <div class="section-header wow fadeInUp" data-wow-delay="0.2s" style="max-width:800px;">
+                <span class="eyebrow">FAQs</span>
+                <h1>Frequently Asked Questions</h1>
+                <p>Welcome to our FAQ section! Here we've compiled answers to the questions we receive most often. Whether you're a prospective student, a current parent, or just curious about our school, this section is here to help. If you don't find what you're looking for, feel free to reach out to us directly.</p>
             </div>
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.2s">
-                    <div class="accordion accordion-flush bg-light rounded p-5" id="accordionFlushSection">
-                        <div class="accordion-item rounded-top">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button collapsed rounded-top" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false">
-                                    Is KTC a day, boarding or online school?
-                                </button>
-                            </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushSection">
-                                <div class="accordion-body">For now, the school will only operate as a day school.</div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false">
-                                    What are the transportation plans for long-distance students?
-                                </button>
-                            </h2>
-                            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushSection">
-                                <div class="accordion-body">The school has made provision for vehicles for the students.</div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false">
-                                    When will admission commence?
-                                </button>
-                            </h2>
-                            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushSection">
-                                <div class="accordion-body">August 2024 for the 2024/2025 academic session.</div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false">
-                                    Any health or safety facilities?
-                                </button>
-                            </h2>
-                            <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushSection">
-                                <div class="accordion-body">The school has a sick bay, safety apparatus and is registered with a recognised medical facility in Port Harcourt.</div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingFive">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false">
-                                    What is the source of electricity?
-                                </button>
-                            </h2>
-                            <div id="flush-collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionFlushSection">
-                                <div class="accordion-body">There is provision for power from PHCN/Generator and solar energy.</div>
-                            </div>
-                        </div>
-                        <div class="accordion-item rounded-bottom">
-                            <h2 class="accordion-header" id="flush-headingSix">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false">
-                                    How many classes is the school starting with?
-                                </button>
-                            </h2>
-                            <div id="flush-collapseSix" class="accordion-collapse collapse" data-bs-parent="#accordionFlushSection">
-                                <div class="accordion-body">Prevocational One (Junior Secondary One / Basic Seven).</div>
-                            </div>
+
+            <div class="faq-grid">
+                <div class="accordion wow fadeInLeft" data-wow-delay="0.2s">
+
+                    <div class="accordion-item">
+                        <button class="accordion-btn" aria-expanded="false">
+                            Is KTC a day, boarding or online school?
+                        </button>
+                        <div class="accordion-body">
+                            <p>For now, the school will only operate as a day school.</p>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
-                    <div class="bg-primary rounded">
-                        <img src="img/school_side2.jpg" class="img-fluid w-100" alt="School">
+
+                    <div class="accordion-item">
+                        <button class="accordion-btn" aria-expanded="false">
+                            What are the transportation plans for long-distance students?
+                        </button>
+                        <div class="accordion-body">
+                            <p>The school has made provision for vehicles for the students.</p>
+                        </div>
                     </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-btn" aria-expanded="false">
+                            When will admission commence?
+                        </button>
+                        <div class="accordion-body">
+                            <p>August 2024 for the 2024/2025 academic session.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-btn" aria-expanded="false">
+                            Any health or safety facilities?
+                        </button>
+                        <div class="accordion-body">
+                            <p>The school has a sick bay, safety apparatus and is registered with a recognised medical facility in Port Harcourt.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-btn" aria-expanded="false">
+                            What is the source of electricity?
+                        </button>
+                        <div class="accordion-body">
+                            <p>There is provision for power from PHCN/Generator and solar energy.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-btn" aria-expanded="false">
+                            How many classes is the school starting with?
+                        </button>
+                        <div class="accordion-body">
+                            <p>Prevocational One (Junior Secondary One / Basic Seven).</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="faq-image wow fadeInRight" data-wow-delay="0.2s">
+                    <img src="img/school_side2.jpg" alt="School">
                 </div>
             </div>
+
         </div>
-    </div>
+    </section>
     <!-- FAQ End -->
 
 
@@ -749,13 +445,14 @@
     <div id="footer"></div>
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
-</div><!-- /.container-xxl -->
+</div><!-- /.page-wrapper -->
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="lib/wow/wow.min.js"></script>
 <script src="lib/easing/easing.min.js"></script>
 <script src="lib/waypoints/waypoints.min.js"></script>
@@ -763,6 +460,11 @@
 <script src="js/main.js"></script>
 
 <script>
+    /* ── Spinner ── */
+    window.addEventListener('load', function () {
+        document.getElementById('spinner').classList.add('hidden');
+    });
+
     /* ── Load shared navbar & footer ── */
     function loadComponent(id, file) {
         fetch(file)
@@ -780,21 +482,55 @@
     loadComponent('navbar', 'navbar.html');
     loadComponent('footer', 'footer.html');
 
+    /* ── Accordion ── */
+    document.querySelectorAll('.accordion-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            const body      = this.nextElementSibling;
+            const isOpen    = this.getAttribute('aria-expanded') === 'true';
+            const accordion = this.closest('.accordion');
+
+            accordion.querySelectorAll('.accordion-btn').forEach(function (b) {
+                b.setAttribute('aria-expanded', 'false');
+                b.nextElementSibling.classList.remove('open');
+            });
+
+            if (!isOpen) {
+                this.setAttribute('aria-expanded', 'true');
+                body.classList.add('open');
+            }
+        });
+    });
+
+    /* ── Back to Top ── */
+    var backBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', function () {
+        if (window.scrollY > 300) {
+            backBtn.classList.add('visible');
+        } else {
+            backBtn.classList.remove('visible');
+        }
+    });
+    backBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     /* ── Homepage quick contact form (Formspree AJAX) ── */
     (function () {
-        const form    = document.getElementById('home-contact-form');
-        const btn     = document.getElementById('hc-btn');
-        const success = document.getElementById('home-form-success');
+        var form    = document.getElementById('home-contact-form');
+        var btn     = document.getElementById('hc-btn');
+        var success = document.getElementById('home-form-success');
+        if (!form) return;
 
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
             if (!form.checkValidity()) { form.reportValidity(); return; }
 
-            btn.innerHTML = 'Sending… <i class="fa fa-spinner fa-spin ms-2"></i>';
+            btn.innerHTML = 'Sending… <i class="fa fa-spinner fa-spin"></i>';
             btn.disabled = true;
 
             try {
-                const res = await fetch(form.action, {
+                var res = await fetch(form.action, {
                     method: 'POST',
                     body: new FormData(form),
                     headers: { 'Accept': 'application/json' }
@@ -802,14 +538,14 @@
 
                 if (res.ok) {
                     form.style.display = 'none';
-                    success.style.display = 'block';
+                    success.classList.add('visible');
                 } else {
-                    btn.innerHTML = 'Send Message <i class="fa fa-paper-plane ms-2"></i>';
+                    btn.innerHTML = 'Send Message <i class="fa fa-paper-plane"></i>';
                     btn.disabled = false;
                     alert('Something went wrong. Please email us at kenleetechnical@gmail.com');
                 }
-            } catch {
-                btn.innerHTML = 'Send Message <i class="fa fa-paper-plane ms-2"></i>';
+            } catch (_) {
+                btn.innerHTML = 'Send Message <i class="fa fa-paper-plane"></i>';
                 btn.disabled = false;
                 alert('Network error. Please check your connection and try again.');
             }

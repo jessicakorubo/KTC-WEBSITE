@@ -1,37 +1,94 @@
-<nav class="navbar navbar-expand-lg sticky-top px-4 px-lg-5 py-lg-0">
+<nav class="navbar">
     <a href="index.html" class="navbar-brand">
         <span class="logo-flex">
-            <img class="ktc-logo" src="img/KTC-LOGO.png" alt="">
+            <img class="ktc-logo" src="img/KTC-LOGO.png" alt="Kenlee Technical College logo">
             <h2>Kenlee Technical College</h2>
         </span>
     </a>
-    <button type="button" class="hamburger navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+
+    <button type="button" class="hamburger" id="hamburger" aria-expanded="false" aria-label="Toggle navigation">
         <span class="bar"></span>
         <span class="bar"></span>
         <span class="bar"></span>
     </button>
 
-
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav mx-auto">
-            <a href="index.html" class="nav-item nav-link">Home</a>
-            <a href="about.html" class="nav-item nav-link">About Us</a>
-            <a href="calendar.html" class="nav-item nav-link">School Calendar</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Find out</a>
-                <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
-                    <a href="facilities.html" class="dropdown-item">School Facilities</a>
+    <div class="navbar-collapse" id="navbarCollapse">
+        <nav class="navbar-nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About Us</a>
+            <a href="calendar.html" class="nav-link">School Calendar</a>
+            <div class="nav-item dropdown" id="findout-dropdown">
+                <a href="#" class="nav-link dropdown-toggle" aria-expanded="false">Find out</a>
+                <div class="dropdown-menu">
+                    <a href="facilities.html"    class="dropdown-item">School Facilities</a>
                     <a href="call-to-action.html" class="dropdown-item">Become A Teacher</a>
-                    <a href="appointment.html" class="dropdown-item">Apply for admission</a>
-                    <a href="curriculum.html" class="dropdown-item">Academic Curriculum</a>
-                    <!-- <a href="404.html" class="dropdown-item">404 Error</a> -->
+                    <a href="appointment.html"   class="dropdown-item">Apply for admission</a>
+                    <a href="curriculum.html"    class="dropdown-item">Academic Curriculum</a>
                 </div>
             </div>
-            <a href="contact.html" class="nav-item nav-link">Contact Us</a>
-            <!-- <a href="contact.html" class="nav-item nav-link"></a> -->
-        </div>
-        <a href="appointment.html" class="btn btn-secondary rounded-pill px-3 d-none d-lg-block">Join Us<i
-                class="fa fa-arrow-right ms-3"></i></a>
+            <a href="contact.html" class="nav-link">Contact Us</a>
+        </nav>
+
+        <a href="appointment.html" class="btn-nav-cta">
+            Join Us <i class="fa fa-arrow-right"></i>
+        </a>
     </div>
 </nav>
+
+<script>
+(function () {
+    function initNavbar() {
+        var ham      = document.getElementById('hamburger');
+        var collapse = document.getElementById('navbarCollapse');
+        var dropdown = document.getElementById('findout-dropdown');
+        var ddToggle = dropdown ? dropdown.querySelector('.dropdown-toggle') : null;
+
+        if (!ham || !collapse) return;
+
+        /* Hamburger open/close */
+        ham.addEventListener('click', function () {
+            var isOpen = collapse.classList.toggle('open');
+            ham.classList.toggle('open', isOpen);
+            ham.setAttribute('aria-expanded', isOpen);
+        });
+
+        /* Mobile dropdown toggle */
+        if (ddToggle) {
+            ddToggle.addEventListener('click', function (e) {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('open');
+                    this.setAttribute('aria-expanded', dropdown.classList.contains('open'));
+                }
+            });
+        }
+
+        /* Close on outside click */
+        document.addEventListener('click', function (e) {
+            if (window.innerWidth <= 992 &&
+                !collapse.contains(e.target) &&
+                !ham.contains(e.target)) {
+                collapse.classList.remove('open');
+                ham.classList.remove('open');
+                ham.setAttribute('aria-expanded', 'false');
+                if (dropdown) dropdown.classList.remove('open');
+            }
+        });
+
+        /* Active link highlight */
+        var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-link, .dropdown-item').forEach(function (link) {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    /* Run after DOM is ready — works whether loaded statically or via fetch() */
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initNavbar);
+    } else {
+        initNavbar();
+    }
+})();
+</script>
